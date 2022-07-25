@@ -1,0 +1,11 @@
+---
+- name: "Allow user to easily view results"
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - debug:
+        var: api_host_groups
+    - debug:
+        var: host_groups
+...
