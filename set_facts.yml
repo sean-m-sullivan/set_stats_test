@@ -1,0 +1,23 @@
+---
+- name: "Allow user to easily view results"
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: "Set Vars"
+      fact_hosts:
+        - host1
+        - host2
+
+    - debug:
+        var: api_host_groups
+    - debug:
+        var: host_groups
+
+    - set_stats:
+        data:
+          list_to_pass: "{{ list_to_pass }}"
+          api_host_groups: "{{ fact_hosts }}"
+        aggregate: false
+        per_host: false
+...
