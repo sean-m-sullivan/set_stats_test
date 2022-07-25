@@ -5,9 +5,10 @@
 
   tasks:
     - name: "Set Vars"
-      fact_hosts:
-        - host1
-        - host2
+      ansible.builtin.set_fact:
+        fact_hosts:
+          - host1
+          - host2
 
     - debug:
         var: api_host_groups
