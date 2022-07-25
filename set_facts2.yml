@@ -1,0 +1,23 @@
+---
+- name: "Allow user to easily view results"
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: "Set Vars"
+      ansible.builtin.set_fact:
+        fact_hosts:
+          - host1a
+          - host2a
+
+    - debug:
+        var: api_host_groups
+    - debug:
+        var: host_groups
+
+    - set_stats:
+        data:
+          api_host_groups: "{{ fact_hosts }}"
+        aggregate: false
+        per_host: false
+...
