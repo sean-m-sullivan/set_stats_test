@@ -16,7 +16,6 @@
 
     - set_stats:
         data:
-          list_to_pass: "{{ list_to_pass }}"
           api_host_groups: "{{ fact_hosts }}"
         aggregate: false
         per_host: false
