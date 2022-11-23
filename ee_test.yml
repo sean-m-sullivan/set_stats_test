@@ -5,18 +5,17 @@
   collections:
     - redhat_cop.controller_configuration
   tasks:
-    - name: Add EE to the controller instance
-      awx.awx.execution_environment:
-        name: ee_test
-        image: hub.nas/custom_ee:1-11-21-2
+    - name: create execution environment definition file
+      ansible.builtin.template:
+        src: ee_controller.yaml.j2
+        dest: "/tmp/ee_controller.yaml"
+        mode: '0644'
 
-    - name: Add Execution Environment
-      include_role:
-        name: redhat_cop.controller_configuration.execution_environments
-      vars:
-        controller_execution_environments:
-          - name: ee_test2      
-            image: hub.nas/custom_ee:1-11-21-2
-            credential: Automation Hub Container Registry
+    - name: Include tempalted variables
+      ansible.builtin.include_vars:
+        file: "/tmp/ee_controller.yaml"
 
+    - name: Include tempalted variables
+      debug:
+        var: controller_execution_environments
 ...
