@@ -4,6 +4,28 @@
   gather_facts: false
   collections:
     - redhat_cop.controller_configuration
+  vars:
+    ee_list:
+      - ee_name: custom_ee:1-11-21-2
+        tag: 1-11-21-2
+        # base_image
+        bindep:
+          - python38-requests [platform:centos-8 platform:rhel-8]
+          - python38-pyyaml [platform:centos-8 platform:rhel-8]
+        python:
+          - pytz  # for schedule_rrule lookup plugin
+          - python-dateutil>=2.7.0  # schedule_rrule
+          - awxkit  # For import and export modules
+        collections:
+          - name: awx.awx
+            version: 21.9.0
+          - name: redhat_cop.controller_configuration
+          - name: redhat_cop.ah_configuration
+        prepend:
+          - RUN whoami
+          - RUN cat /etc/os-release
+        append:
+          - RUN echo This is a post-install command!
   tasks:
     - name: create execution environment definition file
       ansible.builtin.template:
