@@ -1,0 +1,22 @@
+---
+- name: Playbook to create custom EE
+  hosts: all
+  gather_facts: false
+  collections:
+    - redhat_cop.controller_configuration
+  tasks:
+    - name: Add EE to the controller instance
+      execution_environment:
+        name: custom_ee
+        image: hub.nas/custom_ee:1-11-21-2
+
+    - name: Add Execution Environment
+      include_role:
+        name: redhat_cop.controller_configuration.execution_environments
+      vars:
+        controller_execution_environments:
+          - name: custom_ee      
+            image: hub.nas/custom_ee:1-11-21-2
+            credential: Automation Hub Container Registry
+
+...
