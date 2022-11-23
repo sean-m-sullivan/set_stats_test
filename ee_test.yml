@@ -7,7 +7,7 @@
   tasks:
     - name: Add EE to the controller instance
       awx.awx.execution_environment:
-        name: custom_ee
+        name: ee_test
         image: hub.nas/custom_ee:1-11-21-2
 
     - name: Add Execution Environment
@@ -15,7 +15,7 @@
         name: redhat_cop.controller_configuration.execution_environments
       vars:
         controller_execution_environments:
-          - name: custom_ee      
+          - name: ee_test2      
             image: hub.nas/custom_ee:1-11-21-2
             credential: Automation Hub Container Registry
 
