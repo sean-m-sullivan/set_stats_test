@@ -6,7 +6,7 @@
     - redhat_cop.controller_configuration
   tasks:
     - name: Add EE to the controller instance
-      execution_environment:
+      awx.awx.execution_environment:
         name: custom_ee
         image: hub.nas/custom_ee:1-11-21-2
 
